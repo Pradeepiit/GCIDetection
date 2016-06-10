@@ -1,13 +1,13 @@
-function flag = validateInversion(bpfSSS)
+function flag = validateInversion(filteredSpeech)
 
 flag = 1;
-[peaks,ind] = findpeaks(bpfSSS,'MinPeakHeight',max(bpfSSS)/6);
+[peaks,ind] = findpeaks(filteredSpeech,'MinPeakHeight',max(filteredSpeech)/6);
 l1 = length(ind);
 
 peaks = [];
 ind = [];
-bpfSSS = bpfSSS .*-1;
-[peaks,ind] = findpeaks(bpfSSS,'MinPeakHeight',max(bpfSSS)/6);
+filteredSpeech = filteredSpeech .*-1;
+[peaks,ind] = findpeaks(filteredSpeech,'MinPeakHeight',max(filteredSpeech)/6);
 l2 = length(ind);
 
 

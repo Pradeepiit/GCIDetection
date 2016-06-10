@@ -1,26 +1,26 @@
 %BPF based Pitch Extraction
-function avgPitch = periodicityDetection(bpfSSS)
+function avgPitch = periodicityDetection(filteredSpeech)
 %syms x1;
 %syms x2;
 
-%     posPeaks = findpeaks(bpfSSS);
+%     posPeaks = findpeaks(filteredSpeech);
 %     posPeaks = posPeaks(posPeaks > 0);
-%     temp1 = bpfSSS .* -1;
+%     temp1 = filteredSpeech .* -1;
 %     negPeaks = findpeaks(temp1);
 %     negPeaks = negPeaks(negPeaks > 0);
 %     if(length(negPeaks) < length(posPeaks))
-%         bpfSSS = bpfSSS .* -1;
+%         filteredSpeech = filteredSpeech .* -1;
 %     end
-if(length(bpfSSS) > 300)
-    flag = validateInversion(bpfSSS);
+if(length(filteredSpeech) > 300)
+    flag = validateInversion(filteredSpeech);
     if(flag == 0)
-        bpfSSS = bpfSSS .* -1;
+        filteredSpeech = filteredSpeech .* -1;
     end
     frame = 300; %in samples
-    bpfSSS(bpfSSS<0) = 0;
-    bpfSSS = bpfSSS .* bpfSSS;
-    t1 = floor(size(bpfSSS,1)/frame);
-    energy = sum(reshape(bpfSSS(1:frame*t1),[frame t1]));
+    filteredSpeech(filteredSpeech<0) = 0;
+    filteredSpeech = filteredSpeech .* filteredSpeech;
+    t1 = floor(size(filteredSpeech,1)/frame);
+    energy = sum(reshape(filteredSpeech(1:frame*t1),[frame t1]));
     
     [h1,h2] = hist(energy);
     
@@ -40,12 +40,12 @@ if(length(bpfSSS) > 300)
     pitchCandidate = [];
     for i = 1:size(index,2)
         
-        if((index(1,i)+400) > length(bpfSSS))
-            temp1 = bpfSSS;
-        elseif(((index(1,i)+1000) < length(bpfSSS)))
-            temp1 = bpfSSS(index(1,i):index(1,i)+1000);    
+        if((index(1,i)+400) > length(filteredSpeech))
+            temp1 = filteredSpeech;
+        elseif(((index(1,i)+1000) < length(filteredSpeech)))
+            temp1 = filteredSpeech(index(1,i):index(1,i)+1000);    
         else
-            temp1 = bpfSSS(index(1,i):index(1,i)+400);
+            temp1 = filteredSpeech(index(1,i):index(1,i)+400);
         end
         peaks = findpeaks(temp1);
         cutoff = cutoffDetection(peaks);
