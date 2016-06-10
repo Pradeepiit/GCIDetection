@@ -16,7 +16,7 @@ Where arctic_a0007_speech.wav is the speech wave file, GCILoc is the vectore of 
 
 The file arctic_a0007_GCI.txt is the ground truth GCI of arctic_a0007_speech.wav
 
-Manually annotated GCI dataset for CMU-ARCTIC dataset [1] is available in GCI folder.
+Manually annotated GCI dataset for CMU-ARCTIC dataset [1] is available in CMU folder for three different speakers folder (bdl, jmk, slt). The dataset consists of 100 utterances selected randomly for each speaker. Each utterance is provided with speech signal, EGG signal and the manual annotation.
 
 Source code is tested in Matlab 2015A, Windows Environment.
 
