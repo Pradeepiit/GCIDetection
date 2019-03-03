@@ -1,4 +1,4 @@
-A Robust Non-Parametric and Filtering Based Approach for Glottal Closure Instant Detection
+**A Robust Non-Parametric and Filtering Based Approach for Glottal Closure Instant Detection**
 
 Authors : Pradeep Rengaswamy, Gurunath Reddy M, K. Sreenivasa Rao, Pallab Das Gupta
 
